@@ -23,10 +23,7 @@ C:\PosTechFiap\Application\bin\Debug\net8.0\Application.dll
 C:\PosTechFiap\Application\bin\Debug\net8.0\Application.pdb
 C:\PosTechFiap\Application\bin\Debug\net8.0\Domain.dll
 C:\PosTechFiap\Application\bin\Debug\net8.0\Persistence.dll
-C:\PosTechFiap\Application\bin\Debug\net8.0\Infrastructure.dll
 C:\PosTechFiap\Application\bin\Debug\net8.0\Domain.pdb
-C:\PosTechFiap\Application\bin\Debug\net8.0\Persistence.pdb
-C:\PosTechFiap\Application\bin\Debug\net8.0\Infrastructure.pdb
 C:\PosTechFiap\Application\obj\Debug\net8.0\Application.csproj.AssemblyReference.cache
 C:\PosTechFiap\Application\obj\Debug\net8.0\Application.GeneratedMSBuildEditorConfig.editorconfig
 C:\PosTechFiap\Application\obj\Debug\net8.0\Application.AssemblyInfoInputs.cache
@@ -38,3 +35,6 @@ C:\PosTechFiap\Application\obj\Debug\net8.0\Application.dll
 C:\PosTechFiap\Application\obj\Debug\net8.0\refint\Application.dll
 C:\PosTechFiap\Application\obj\Debug\net8.0\Application.pdb
 C:\PosTechFiap\Application\obj\Debug\net8.0\ref\Application.dll
+C:\PosTechFiap\Application\bin\Debug\net8.0\Infrastructure.dll
+C:\PosTechFiap\Application\bin\Debug\net8.0\Persistence.pdb
+C:\PosTechFiap\Application\bin\Debug\net8.0\Infrastructure.pdb

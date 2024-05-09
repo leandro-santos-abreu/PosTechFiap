@@ -1,7 +1,6 @@
 ﻿using Application.Contracts;
 using Domain.Request;
 using Persistence.Contract;
-using Persistence.Repositories;
 using System.Text.RegularExpressions;
 
 namespace Application.Services;

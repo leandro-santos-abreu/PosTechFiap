@@ -6,11 +6,11 @@ namespace Infrastructure.Context;
 public sealed class DbContext : IDbContext
 {
     public IDbConnection Context { get; }
-    public IDbTransaction Transaction { get; set; } = default!;
 
     public DbContext(IConfiguration configuration)
     {
-        Context = new SqlConnection(configuration["Settings:DbConnectionString"]);
+        var connectionString = configuration["Settings:DbConnectionString"];
+        Context = new SqlConnection(connectionString);
         Context.Open();
     }
 

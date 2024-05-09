@@ -1,10 +1,11 @@
 ﻿using Dapper;
 using Domain.Request;
 using Infrastructure.Context;
+using Persistence.Contract;
 using Persistence.Sql;
 
 namespace Persistence.Repositories;
-public class ContactRepository(IDbContext db)
+public class ContactRepository(IDbContext db) : IContactRepository
 {
     public async Task<bool> Create(CreateContactRequest request)
     {
