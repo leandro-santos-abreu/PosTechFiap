@@ -1,27 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\PosTechFiap\\Infrastructure\\Infrastructure.csproj": {}
+    "F:\\PosTechFiap\\Infrastructure\\Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\PosTechFiap\\Infrastructure\\Infrastructure.csproj": {
+    "F:\\PosTechFiap\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\PosTechFiap\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "F:\\PosTechFiap\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\PosTechFiap\\Infrastructure\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-        "outputPath": "C:\\PosTechFiap\\Infrastructure\\obj\\",
+        "projectPath": "F:\\PosTechFiap\\Infrastructure\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\caio_\\.nuget\\packages\\",
+        "outputPath": "F:\\PosTechFiap\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
         "configFilePaths": [
-          "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\caio_\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {

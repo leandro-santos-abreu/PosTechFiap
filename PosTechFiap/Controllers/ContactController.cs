@@ -1,14 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using PosTechFiap.Request;
+﻿using Application.Contracts;
+using Domain.Request;
+using Microsoft.AspNetCore.Mvc;
+
 
 namespace PosTechFiap.Controllers;
 
 [Route("api/[controller]")]
-public class ContactController : ControllerBase
+public class ContactController(IContactService _contactService) : ControllerBase
 {
     [HttpPost()]
-    public IActionResult Create([FromBody] ContactRequest contact)
+    public async Task<IActionResult> Create([FromBody] CreateContactRequest contact)
     {
-        return Ok();
+        var result = await _contactService.Create(contact); 
+
+        return result?Ok():BadRequest() ;
+
+
     }
+
+
 }
