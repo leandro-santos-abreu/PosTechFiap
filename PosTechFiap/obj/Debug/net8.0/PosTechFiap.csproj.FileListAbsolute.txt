@@ -5,3 +5,10 @@ F:\PosTechFiap\PosTechFiap\obj\Debug\net8.0\PosTechFiap.AssemblyInfo.cs
 F:\PosTechFiap\PosTechFiap\obj\Debug\net8.0\PosTechFiap.csproj.CoreCompileInputs.cache
 F:\PosTechFiap\PosTechFiap\obj\Debug\net8.0\PosTechFiap.MvcApplicationPartsAssemblyInfo.cache
 F:\PosTechFiap\PosTechFiap\obj\Debug\net8.0\PosTechFiap.sourcelink.json
+C:\PosTechFiap\PosTechFiap\obj\Debug\net8.0\PosTechFiap.csproj.AssemblyReference.cache
+C:\PosTechFiap\PosTechFiap\obj\Debug\net8.0\PosTechFiap.GeneratedMSBuildEditorConfig.editorconfig
+C:\PosTechFiap\PosTechFiap\obj\Debug\net8.0\PosTechFiap.AssemblyInfoInputs.cache
+C:\PosTechFiap\PosTechFiap\obj\Debug\net8.0\PosTechFiap.AssemblyInfo.cs
+C:\PosTechFiap\PosTechFiap\obj\Debug\net8.0\PosTechFiap.csproj.CoreCompileInputs.cache
+C:\PosTechFiap\PosTechFiap\obj\Debug\net8.0\PosTechFiap.MvcApplicationPartsAssemblyInfo.cache
+C:\PosTechFiap\PosTechFiap\obj\Debug\net8.0\PosTechFiap.sourcelink.json

@@ -10,3 +10,15 @@ F:\PosTechFiap\Domain\obj\Debug\net8.0\Domain.dll
 F:\PosTechFiap\Domain\obj\Debug\net8.0\refint\Domain.dll
 F:\PosTechFiap\Domain\obj\Debug\net8.0\Domain.pdb
 F:\PosTechFiap\Domain\obj\Debug\net8.0\ref\Domain.dll
+C:\PosTechFiap\Domain\bin\Debug\net8.0\Domain.deps.json
+C:\PosTechFiap\Domain\bin\Debug\net8.0\Domain.dll
+C:\PosTechFiap\Domain\bin\Debug\net8.0\Domain.pdb
+C:\PosTechFiap\Domain\obj\Debug\net8.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\PosTechFiap\Domain\obj\Debug\net8.0\Domain.AssemblyInfoInputs.cache
+C:\PosTechFiap\Domain\obj\Debug\net8.0\Domain.AssemblyInfo.cs
+C:\PosTechFiap\Domain\obj\Debug\net8.0\Domain.csproj.CoreCompileInputs.cache
+C:\PosTechFiap\Domain\obj\Debug\net8.0\Domain.sourcelink.json
+C:\PosTechFiap\Domain\obj\Debug\net8.0\Domain.dll
+C:\PosTechFiap\Domain\obj\Debug\net8.0\refint\Domain.dll
+C:\PosTechFiap\Domain\obj\Debug\net8.0\Domain.pdb
+C:\PosTechFiap\Domain\obj\Debug\net8.0\ref\Domain.dll

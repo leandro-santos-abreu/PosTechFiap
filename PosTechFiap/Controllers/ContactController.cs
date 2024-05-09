@@ -14,9 +14,5 @@ public class ContactController(IContactService _contactService) : ControllerBase
         var result = await _contactService.Create(contact); 
 
         return result?Ok():BadRequest() ;
-
-
     }
-
-
 }
