@@ -21,7 +21,7 @@ public class ContactController(IContactService _contactService) : ControllerBase
     [HttpPut()]
     public async Task<IActionResult> Update([FromBody] UpdateContactRequest contact)
     {
-        if(!await _contactService.Exists(contact.DDD, contact.Telephone)) return BadRequest("Contact not found.");
+        if(await _contactService.Exists(contact.DDD, contact.Telephone)) return BadRequest("Contact already exist.");
         var result = await _contactService.Update(contact);
         return result ? Ok() : BadRequest();
     }
