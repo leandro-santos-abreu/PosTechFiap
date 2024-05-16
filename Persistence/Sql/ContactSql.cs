@@ -45,7 +45,8 @@ public class ContactSql
             [Telephone] = @Telephone,
             [Email] = @Email
         WHERE 
-            [Id] = @Id
+            [Id] = @Id; 
+SELECT @@ROWCOUNT;
     ";
 
     public static readonly string Delete = @"

@@ -2320,37 +2320,43 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lucas\\.nuget\\packages\\": {}
+    "C:\\Users\\caio_\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\PosTechFiap\\Application\\Application.csproj",
+      "projectUniqueName": "F:\\PosTechFiap\\Application\\Application.csproj",
       "projectName": "Application",
-      "projectPath": "C:\\PosTechFiap\\Application\\Application.csproj",
-      "packagesPath": "C:\\Users\\lucas\\.nuget\\packages\\",
-      "outputPath": "C:\\PosTechFiap\\Application\\obj\\",
+      "projectPath": "F:\\PosTechFiap\\Application\\Application.csproj",
+      "packagesPath": "C:\\Users\\caio_\\.nuget\\packages\\",
+      "outputPath": "F:\\PosTechFiap\\Application\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+      ],
       "configFilePaths": [
-        "C:\\Users\\lucas\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Users\\caio_\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
           "projectReferences": {
-            "C:\\PosTechFiap\\Domain\\Domain.csproj": {
-              "projectPath": "C:\\PosTechFiap\\Domain\\Domain.csproj"
+            "F:\\PosTechFiap\\Domain\\Domain.csproj": {
+              "projectPath": "F:\\PosTechFiap\\Domain\\Domain.csproj"
             },
-            "C:\\PosTechFiap\\Persistence\\Persistence.csproj": {
-              "projectPath": "C:\\PosTechFiap\\Persistence\\Persistence.csproj"
+            "F:\\PosTechFiap\\Persistence\\Persistence.csproj": {
+              "projectPath": "F:\\PosTechFiap\\Persistence\\Persistence.csproj"
             }
           }
         }

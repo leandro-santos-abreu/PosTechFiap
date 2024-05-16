@@ -33,12 +33,13 @@ public class ContactRepository(IDbContext db) : IContactRepository
     public async Task<bool> Update(UpdateContactRequest request)
     {
         var parameters = new DynamicParameters();
+        parameters.Add("@Id", request.Id);
         parameters.Add("@Name", request.Name);
         parameters.Add("@DDD", request.DDD);
         parameters.Add("@Telephone", request.Telephone);
         parameters.Add("@Email", request.Email);
 
-        return await db.Context.ExecuteScalarAsync<bool>(ContactSql.Update, parameters);
+        return await db.Context.ExecuteScalarAsync<int>(ContactSql.Update, parameters) > 0;
     }
 
     public async Task<bool> Delete(int id)

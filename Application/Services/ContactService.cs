@@ -39,8 +39,9 @@ public class ContactService(IContactRepository _contactRepository) : IContactSer
         if(string.IsNullOrEmpty(Telephone)) return false;
         if(DDD < 1) return false;
 
-        if (Regex.IsMatch(Name, @"[^a-zA-Z]")) return false;
+        if (Regex.IsMatch(request.Name, @"/^[A-ZÀ-Ÿ][A-zÀ-ÿ']+\s([A-zÀ-ÿ']\s?)*[A-ZÀ-Ÿ][A-zÀ-ÿ']+$/")) return false;
         //TODO: validar se o numero de telefone + DDD já foi inserido anteriormente.
+        if (!string.IsNullOrEmpty(request.Email) && !Regex.IsMatch(request.Email, @"^[\w.-]+@[a-zA-Z\d.-]+.[a-zA-Z]{2,}$")) return false;
 
         return true;
     }
