@@ -1,6 +1,6 @@
 ﻿namespace Domain.Request;
 
-public class UpdateContactRequest : IContactRequest
+public class UpdateContactRequest
 {
     public int Id { get; set; }
     public string Name { get; set; } = string.Empty;
