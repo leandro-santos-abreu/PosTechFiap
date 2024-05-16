@@ -1,20 +1,28 @@
 using Application.Contracts;
+using Application.Mediator.Command;
+using Application.Mediator.Queries;
 using Domain.Request;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace PosTechFiap.Controllers;
 
 [Route("api/[controller]")]
-public class ContactController(IContactService _contactService) : ControllerBase
+public class ContactController(IContactService _contactService, IMediator _mediator) : ControllerBase
 {
     [HttpGet()]
-    public async Task<IActionResult> Get(int? DDD) => Ok(await _contactService.Get(DDD));
+    public async Task<IActionResult> Get(int? DDD) 
+    {
+        var query = new GetContactQuery(DDD);
+        var result = await _mediator.Send(query);
+        return Ok(result);
+    }
 
     [HttpPost()]
     public async Task<IActionResult> Create([FromBody] CreateContactRequest contact)
     {
-        if(await _contactService.Exists(contact.DDD, contact.Email)) return BadRequest("Contact already exists.");
-        var result = await _contactService.Create(contact);
+        var command = new CreateContactCommand(contact.Name, contact.DDD, contact.Telephone, contact.Email);
+        var result = await _mediator.Send(command);
         return result ? Ok() : BadRequest();
     }
 

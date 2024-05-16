@@ -8,13 +8,13 @@ using Persistence.Sql;
 namespace Persistence.Repositories;
 public class ContactRepository(IDbContext db) : IContactRepository
 {
-    public async Task<bool> Create(CreateContactRequest request)
+    public async Task<bool> Create(string Telephone, string Name, int DDD, string Email)
     {
         var parameters = new DynamicParameters();
-        parameters.Add("@Name", request.Name);
-        parameters.Add("@DDD", request.DDD);
-        parameters.Add("@Telephone", request.Telephone);
-        parameters.Add("@Email", request.Email);
+        parameters.Add("@Name", Name);
+        parameters.Add("@DDD", DDD);
+        parameters.Add("@Telephone", Telephone);
+        parameters.Add("@Email", Email);
 
         return await db.Context.ExecuteScalarAsync<bool>(ContactSql.Insert, parameters);
     }
