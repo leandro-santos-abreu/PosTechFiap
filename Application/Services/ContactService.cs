@@ -1,9 +1,7 @@
 ﻿using Application.Contracts;
 using Application.Mediator.Command;
 using Domain.Models;
-using Domain.Request;
 using Persistence.Contract;
-using System.Text.RegularExpressions;
 
 namespace Application.Services;
 public class ContactService(IContactRepository _contactRepository) : IContactService
@@ -29,6 +27,4 @@ public class ContactService(IContactRepository _contactRepository) : IContactSer
     }
 
     public async Task<bool> Delete(int id) => await _contactRepository.Delete(id);
-
-  
 }

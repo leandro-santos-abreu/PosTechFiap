@@ -31,8 +31,6 @@ public class ContactRepository(IDbContext db) : IContactRepository
         return await db.Context.ExecuteScalarAsync<bool>(ContactSql.Exists, parameters);
     }
 
-   
-
     public async Task<bool> Delete(int id)
     {
         return await db.Context.ExecuteScalarAsync<bool>(ContactSql.Delete, new { id });

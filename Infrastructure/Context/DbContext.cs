@@ -6,6 +6,7 @@ namespace Infrastructure.Context;
 public sealed class DbContext : IDbContext
 {
     public IDbConnection Context { get; }
+    public IDbTransaction Transaction { get; set; } = default!;
 
     public DbContext(IConfiguration configuration)
     {

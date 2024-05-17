@@ -4,4 +4,5 @@ namespace Infrastructure.Context;
 public interface IDbContext : IDisposable
 {
     IDbConnection Context { get; }
+    IDbTransaction? Transaction { get; }
 }
