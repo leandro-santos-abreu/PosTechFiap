@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using Azure.Core;
+using Dapper;
 using Domain.Models;
 using Domain.Request;
 using Infrastructure.Context;
@@ -30,20 +31,22 @@ public class ContactRepository(IDbContext db) : IContactRepository
         return await db.Context.ExecuteScalarAsync<bool>(ContactSql.Exists, parameters);
     }
 
-    public async Task<bool> Update(UpdateContactRequest request)
-    {
-        var parameters = new DynamicParameters();
-        parameters.Add("@Id", request.Id);
-        parameters.Add("@Name", request.Name);
-        parameters.Add("@DDD", request.DDD);
-        parameters.Add("@Telephone", request.Telephone);
-        parameters.Add("@Email", request.Email);
-
-        return await db.Context.ExecuteScalarAsync<int>(ContactSql.Update, parameters) > 0;
-    }
+   
 
     public async Task<bool> Delete(int id)
     {
         return await db.Context.ExecuteScalarAsync<bool>(ContactSql.Delete, new { id });
+    }
+
+    public async Task<bool> Update(int Id, string Telephone, string Name, int DDD, string Email)
+    {
+        var parameters = new DynamicParameters();
+        parameters.Add("@Id", Id);
+        parameters.Add("@Name", Name);
+        parameters.Add("@DDD", DDD);
+        parameters.Add("@Telephone", Telephone);
+        parameters.Add("@Email", Email);
+
+        return await db.Context.ExecuteScalarAsync<int>(ContactSql.Update, parameters) > 0;
     }
 }

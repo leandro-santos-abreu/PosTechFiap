@@ -9,8 +9,8 @@ namespace Application.Contracts
         Task<bool> Create(CreateContactCommand request);
         Task<IEnumerable<Contact>> Get();
         Task<IEnumerable<Contact>> Get(int? DDD);
+        Task<bool> Update(UpdateContactCommand request);
         Task<bool> Exists(int DDD, string Telephone);
-        Task<bool> Update(UpdateContactRequest request);
         Task<bool> Delete(int id);
     }
 }

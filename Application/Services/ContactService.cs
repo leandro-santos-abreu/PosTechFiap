@@ -9,8 +9,7 @@ namespace Application.Services;
 public class ContactService(IContactRepository _contactRepository) : IContactService
 {
     public async Task<bool> Create(CreateContactCommand request)
-    {
-        if (!IsValid(request.Telephone, request.Name, request.DDD)) return false;
+    {        
         return await _contactRepository.Create(request.Telephone, request.Name, request.DDD, request.Email);
     }
 
@@ -24,23 +23,12 @@ public class ContactService(IContactRepository _contactRepository) : IContactSer
 
     public async Task<bool> Exists(int DDD, string Telephone) => await _contactRepository.Exists(DDD, Telephone);
 
-    public async Task<bool> Update(UpdateContactRequest request)
-    {
-        if (!IsValid(request.Telephone, request.Name, request.DDD)) return false;
-        return await _contactRepository.Update(request);
+    public async Task<bool> Update(UpdateContactCommand request)
+    {       
+        return await _contactRepository.Update(request.Id,  request.Telephone, request.Name, request.DDD, request.Email);
     }
 
     public async Task<bool> Delete(int id) => await _contactRepository.Delete(id);
 
-    private bool IsValid(string Telephone, string Name, int DDD)
-    {
-        if (request.Telephone.Length != 9) return false;
-        if(string.IsNullOrEmpty(request.Name)) return false;
-        if(string.IsNullOrEmpty(request.Telephone)) return false;
-        if(request.DDD < 1) return false;
-        if (Regex.IsMatch(request.Name, @"/^[A-ZÀ-Ÿ][A-zÀ-ÿ']+\s([A-zÀ-ÿ']\s?)*[A-ZÀ-Ÿ][A-zÀ-ÿ']+$/")) return false;
-        if (!string.IsNullOrEmpty(request.Email) && !Regex.IsMatch(request.Email, @"^[\w.-]+@[a-zA-Z\d.-]+.[a-zA-Z]{2,}$")) return false;
-
-        return true;
-    }
+  
 }

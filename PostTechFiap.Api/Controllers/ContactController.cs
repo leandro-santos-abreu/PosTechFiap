@@ -1,6 +1,7 @@
 using Application.Contracts;
 using Application.Mediator.Command;
 using Application.Mediator.Queries;
+using Domain.Models;
 using Domain.Request;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -29,17 +30,16 @@ public class ContactController(IContactService _contactService, IMediator _media
     [HttpPut()]
     public async Task<IActionResult> Update([FromBody] UpdateContactRequest contact)
     {
-        if(await _contactService.Exists(contact.DDD, contact.Telephone)) return BadRequest("Contact already exist.");
-        var result = await _contactService.Update(contact);
+        var command = new UpdateContactCommand(contact.Id, contact.Name, contact.DDD, contact.Telephone, contact.Email);
+        var result = await _mediator.Send(command);
         return result ? Ok() : BadRequest();
     }
 
     [HttpDelete()]
     public async Task<IActionResult> Delete(int id)
     {
-        var contact = (await _contactService.Get()).SingleOrDefault(i => i.Id == id);
-        if(contact is null) return BadRequest("Contact not found.");
-        var result = await _contactService.Delete(id);
+        var command = new DeleteContactCommand(id);
+        var result = await _mediator.Send(command);
         return result ? Ok() : BadRequest();
     }
 }

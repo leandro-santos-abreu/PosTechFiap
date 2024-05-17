@@ -17,6 +17,8 @@ public static class MediatorCollectionExtensions
     {
         services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
         return services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly())
-            .AddValidation<CreateTenantValidator>());
+            .AddValidation<CreateContactValidator>()
+            .AddValidation<UpdateContactValidator>()
+            );
     }
 }

@@ -3,7 +3,7 @@ using FluentValidation.Results;
 using MediatR;
 
 namespace Application.Validator;
-public class ValidationBehavior<TRequest>(IValidator<TRequest> validator) : IPipelineBehavior<TRequest, ValidationResult> where TRequest : notnull where TResult : notnull
+public class ValidationBehavior<TRequest>(IValidator<TRequest> validator) : IPipelineBehavior<TRequest, ValidationResult> where TRequest : notnull 
 {
     private readonly IValidator<TRequest> validator = validator ?? throw new ArgumentNullException(nameof(validator));
 
