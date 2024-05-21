@@ -66,6 +66,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Database.publish.xml" />
-    <None Include="dbo\Scripts\InsertDDD.sql" />
+    <PostDeploy Include="dbo\Scripts\InsertDDD.sql" />
   </ItemGroup>
 </Project>
