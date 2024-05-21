@@ -1,7 +1,5 @@
-using Application.Contracts;
 using Application.Mediator.Command;
 using Application.Mediator.Queries;
-using Domain.Models;
 using Domain.Request;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

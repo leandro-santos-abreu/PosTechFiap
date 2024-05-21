@@ -1,5 +1,6 @@
 ﻿using Azure.Core;
 using Dapper;
+using Domain.Entities;
 using Domain.Models;
 using Domain.Request;
 using Infrastructure.Context;

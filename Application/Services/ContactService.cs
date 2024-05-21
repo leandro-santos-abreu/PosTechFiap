@@ -1,6 +1,6 @@
 ﻿using Application.Contracts;
 using Application.Mediator.Command;
-using Domain.Models;
+using Domain.Entities;
 using Persistence.Contract;
 
 namespace Application.Services;

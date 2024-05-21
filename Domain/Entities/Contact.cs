@@ -1,6 +1,4 @@
-﻿using Domain.Entities;
-
-namespace Domain.Models;
+﻿namespace Domain.Entities;
 public class Contact : BaseEntity
 {
     public string Name { get; set; } = string.Empty;

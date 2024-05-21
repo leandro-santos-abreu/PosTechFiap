@@ -1,5 +1,5 @@
 ﻿using Application.Contracts;
-using Domain.Models;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Mediator.Queries;

@@ -1,5 +1,4 @@
-﻿using Domain.Models;
-using Domain.Request;
+﻿using Domain.Entities;
 
 namespace Persistence.Contract
 {

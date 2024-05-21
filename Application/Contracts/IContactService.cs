@@ -1,6 +1,5 @@
 ﻿using Application.Mediator.Command;
-using Domain.Models;
-using Domain.Request;
+using Domain.Entities;
 
 namespace Application.Contracts
 {
