@@ -11,9 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "Infrastru
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "Domain\Domain.csproj", "{11496982-BAE2-4CC0-A9BB-FF2D4D59FC9C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PostTechFiap.Api", "PostTechFiap.Api\PostTechFiap.Api.csproj", "{C66CB706-9A1E-4DDA-8AFA-DD6663C0ECB6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostTechFiap.Api", "PostTechFiap.Api\PostTechFiap.Api.csproj", "{C66CB706-9A1E-4DDA-8AFA-DD6663C0ECB6}"
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Database", "Database\Database.sqlproj", "{4F8C821C-8595-45CF-912B-F14F41EB7D9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PosTechFiap.Test", "PosTechFiap.Test\PosTechFiap.Test.csproj", "{67C99358-955B-4BB4-AE71-0AED2108EB00}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +49,10 @@ Global
 		{4F8C821C-8595-45CF-912B-F14F41EB7D9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4F8C821C-8595-45CF-912B-F14F41EB7D9B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4F8C821C-8595-45CF-912B-F14F41EB7D9B}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{67C99358-955B-4BB4-AE71-0AED2108EB00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{67C99358-955B-4BB4-AE71-0AED2108EB00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{67C99358-955B-4BB4-AE71-0AED2108EB00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{67C99358-955B-4BB4-AE71-0AED2108EB00}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
