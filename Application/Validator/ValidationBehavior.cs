@@ -1,7 +1,4 @@
-﻿using FluentValidation;
-using MediatR;
-
-namespace Application.Validator;
+﻿namespace Application.Validator;
 public class ValidationBehavior<TRequest>(IValidator<TRequest> validator) : IPipelineBehavior<TRequest, bool> where TRequest : notnull 
 {
     private readonly IValidator<TRequest> validator = validator ?? throw new ArgumentNullException(nameof(validator));

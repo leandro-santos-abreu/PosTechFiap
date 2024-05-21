@@ -1,5 +1,4 @@
-﻿using Application.Contracts;
-using MediatR;
+﻿
 
 namespace Application.Mediator.Command;
 public record CreateContactCommand(string Name, int DDD, string Telephone, string Email) : IRequest<bool>;

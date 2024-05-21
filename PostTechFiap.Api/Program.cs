@@ -1,10 +1,3 @@
-using Application.Configuration;
-using Application.Contracts;
-using Application.Services;
-using Infrastructure.Context;
-using Persistence.Contract;
-using Persistence.Repositories;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();

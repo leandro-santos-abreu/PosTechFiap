@@ -1,10 +1,5 @@
-﻿using Application.Contracts;
-using Domain.Entities;
-using MediatR;
-
-namespace Application.Mediator.Queries;
+﻿namespace Application.Mediator.Queries;
 public record GetContactQuery(int? DDD) : IRequest<IEnumerable<Contact>>;
-
 public class GetContactQueryHandler(IContactService contactService) : IRequestHandler<GetContactQuery, IEnumerable<Contact>>
 {
     public async Task<IEnumerable<Contact>> Handle(GetContactQuery request, CancellationToken cancellationToken)

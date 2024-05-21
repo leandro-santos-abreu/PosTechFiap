@@ -1,9 +1,3 @@
-using Application.Mediator.Command;
-using Application.Mediator.Queries;
-using Domain.Request;
-using MediatR;
-using Microsoft.AspNetCore.Mvc;
-
 namespace PosTechFiap.Controllers;
 
 [Route("api/[controller]")]

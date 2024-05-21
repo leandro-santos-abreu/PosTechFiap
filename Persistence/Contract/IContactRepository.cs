@@ -1,6 +1,4 @@
-﻿using Domain.Entities;
-
-namespace Persistence.Contract
+﻿namespace Persistence.Contract
 {
     public interface IContactRepository
     {

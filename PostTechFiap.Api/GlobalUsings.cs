@@ -1,0 +1,11 @@
+﻿global using Application.Mediator.Command;
+global using Application.Mediator.Queries;
+global using Domain.Request;
+global using MediatR;
+global using Microsoft.AspNetCore.Mvc;
+global using Application.Configuration;
+global using Application.Contracts;
+global using Application.Services;
+global using Infrastructure.Context;
+global using Persistence.Contract;
+global using Persistence.Repositories;

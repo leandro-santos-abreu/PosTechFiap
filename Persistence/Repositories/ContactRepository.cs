@@ -1,13 +1,4 @@
-﻿using Azure.Core;
-using Dapper;
-using Domain.Entities;
-using Domain.Models;
-using Domain.Request;
-using Infrastructure.Context;
-using Persistence.Contract;
-using Persistence.Sql;
-
-namespace Persistence.Repositories;
+﻿namespace Persistence.Repositories;
 public class ContactRepository(IDbContext db) : IContactRepository
 {
     public async Task<bool> Create(string Telephone, string Name, int DDD, string Email)

@@ -46,7 +46,7 @@ public class ContactSql
             [Email] = @Email
         WHERE 
             [Id] = @Id; 
-SELECT @@ROWCOUNT;
+        SELECT @@ROWCOUNT;
     ";
 
     public static readonly string Delete = @"

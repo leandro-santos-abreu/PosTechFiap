@@ -1,13 +1,4 @@
-﻿using Application.Contracts;
-using Application.Services;
-using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Application.Mediator.Command
+﻿namespace Application.Mediator.Command
 {
     public record DeleteContactCommand(int Id) : IRequest<bool>;
     public class DeleteContactCommandHandler(IContactService contactService) : IRequestHandler<DeleteContactCommand, bool>
