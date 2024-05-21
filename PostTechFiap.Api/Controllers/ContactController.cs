@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace PosTechFiap.Controllers;
 
 [Route("api/[controller]")]
-public class ContactController(IContactService _contactService, IMediator _mediator) : ControllerBase
+public class ContactController(IMediator _mediator) : ControllerBase
 {
     [HttpGet()]
     public async Task<IActionResult> Get(int? DDD) 
