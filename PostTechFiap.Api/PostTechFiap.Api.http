@@ -1,6 +1,0 @@
-@PostTechFiap.Api_HostAddress = http://localhost:5244
-
-GET {{PostTechFiap.Api_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
