@@ -1,4 +1,5 @@
 ﻿using Application.Contracts;
+using Application.Mediator.Command;
 using Application.Services;
 using Domain.Entities;
 using Moq;
@@ -46,7 +47,44 @@ public class ContactServiceTest
     public async Task Test_Get_By_DDD()
     {
         var result = await _contactService.Get(11);
-        Assert.That(result.Count(), Is.EqualTo(1));
+        Assert.That(result.Count(), Is.EqualTo(1)); 
         Assert.That(result, Is.EqualTo(contacts.Where(i => i.DDD == 11)));
+    }
+
+    [Test]
+    public async Task Test_Create()
+    {
+        //var newContact = new Contact(4) { Name = "New User", Email = "new.user@example.com", DDD = 15, Telephone = "912345678" };
+
+        CreateContactCommand request = new CreateContactCommand("New User",  15, "912345678", "new.user@example.com");
+
+        var result = await _contactService.Create(request);
+
+        Assert.IsTrue(result);
+        _contactRepository.Verify(i => i.Create(request.Telephone, request.Name, request.DDD, request.Email ), Times.Once);
+    }
+
+    [Test]
+    public async Task Test_Update()
+    {
+        var updatedContact = new Contact(1) { Name = "Updated User", Email = "updated.user@example.com", DDD = 15, Telephone = "912345678" };
+
+        UpdateContactCommand request = new UpdateContactCommand(updatedContact.Id, updatedContact.Name,updatedContact.DDD,  updatedContact.Telephone, updatedContact.Email);
+
+        var result = await _contactService.Update(request);
+
+        Assert.IsTrue(result);
+        _contactRepository.Verify(i => i.Update(updatedContact.Id, updatedContact.Name, updatedContact.Email, updatedContact.DDD, updatedContact.Telephone), Times.Once);
+    }
+
+    [Test]
+    public async Task Test_Delete()
+    {
+        int contactIdToDelete = 1;
+
+        var result = await _contactService.Delete(contactIdToDelete);
+
+        Assert.IsTrue(result);
+        _contactRepository.Verify(i => i.Delete(contactIdToDelete), Times.Once);
     }
 }
