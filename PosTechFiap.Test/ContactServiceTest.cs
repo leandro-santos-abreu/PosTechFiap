@@ -87,4 +87,16 @@ public class ContactServiceTest
         Assert.IsTrue(result);
         _contactRepository.Verify(i => i.Delete(contactIdToDelete), Times.Once);
     }
+
+    [Test]
+    public async Task Test_Exists()
+    {
+        int contactId = 1;
+        string email = "john.doe@example.com";
+
+        var result = await _contactService.Exists(contactId, email);
+
+        Assert.IsTrue(result);
+        _contactRepository.Verify(i => i.Exists(contactId, email), Times.Once);
+    }
 }
