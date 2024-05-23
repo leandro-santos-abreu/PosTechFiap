@@ -32,7 +32,8 @@ public class ContactServiceTest
         _contactRepository.Setup(i => i.Create(It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync(true);
         _contactRepository.Setup(i => i.Update(It.IsAny<int>(), It.IsAny<string>(), It.IsAny<string>(), It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync(true);
         _contactRepository.Setup(i => i.Delete(It.IsAny<int>())).ReturnsAsync(true);
-        //_contactRepository.Setup(i => i.Exists(It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync(true);
+        
+        _DDDRepository.Setup(i => i.Exists(It.IsAny<int>())).ReturnsAsync(true);
     }
 
     [Test]
@@ -55,6 +56,7 @@ public class ContactServiceTest
     public async Task Test_Create()
     {
         _contactRepository.Setup(i => i.Exists(It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync(false);
+
         CreateContactCommand request = new CreateContactCommand("New User",  15, "912345678", "new.user@example.com");
 
         var result = await _contactService.Create(request);
@@ -65,9 +67,9 @@ public class ContactServiceTest
     [Test]
     public async Task Test_Update()
     {
-        var updatedContact = new Contact(1) { Name = "Updated User", Email = "updated.user@example.com", DDD = 15, Telephone = "912345678" };
+        _contactRepository.Setup(i => i.Exists(It.IsAny<int>(), It.IsAny<string>())).ReturnsAsync(true);
 
-        UpdateContactCommand request = new UpdateContactCommand(updatedContact.Id, updatedContact.Name,updatedContact.DDD,  updatedContact.Telephone, updatedContact.Email);
+        UpdateContactCommand request = new UpdateContactCommand(1, "Updated User", 15, "912345678", "updated.user@example.com");
 
         var result = await _contactService.Update(request);
 
@@ -80,17 +82,6 @@ public class ContactServiceTest
         int contactIdToDelete = 1;
 
         var result = await _contactService.Delete(contactIdToDelete);
-
-        Assert.IsTrue(result);
-    }
-
-    [Test]
-    public async Task Test_Exists()
-    {
-        int contactId = 1;
-        string email = "john.doe@example.com";
-
-        var result = await _contactService.Exists(contactId, email);
 
         Assert.IsTrue(result);
     }

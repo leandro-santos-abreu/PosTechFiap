@@ -4,7 +4,7 @@ public class CreateContactCommandHandler(IContactService contactService) : IRequ
 {
     public async Task<bool> Handle(CreateContactCommand request, CancellationToken cancellationToken)
     {
-        if (await contactService.Exists(request.DDD, request.Email)) return false;
+        if (await contactService.Exists(request.DDD, request.Telephone)) return false;
         var result = await contactService.Create(request);
         return result;
     }

@@ -1,5 +1,5 @@
 ﻿namespace Persistence.Contract;
 public interface IDDDRepository
 {
-    Task<bool> Exist(int DDD);
+    Task<bool> Exists(int DDD);
 }

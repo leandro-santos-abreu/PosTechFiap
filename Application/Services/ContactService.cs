@@ -3,7 +3,7 @@ public class ContactService(IContactRepository contactRepository, IDDDRepository
 {
     public async Task<bool> Create(CreateContactCommand request)
     {
-        if (!await DDDRepository.Exist(request.DDD)) return false;
+        if (!await DDDRepository.Exists(request.DDD)) return false;
         return await contactRepository.Create(request.Telephone, request.Name, request.DDD, request.Email);
     }
 
@@ -17,7 +17,7 @@ public class ContactService(IContactRepository contactRepository, IDDDRepository
 
     public async Task<bool> Update(UpdateContactCommand request)
     {
-        if (!await DDDRepository.Exist(request.DDD)) return false;
+        if (!await DDDRepository.Exists(request.DDD)) return false;
         return await contactRepository.Update(request.Id,  request.Telephone, request.Name, request.DDD, request.Email);
     }
 
