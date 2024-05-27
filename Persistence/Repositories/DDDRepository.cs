@@ -1,5 +1,5 @@
 ﻿namespace Persistence.Repositories;
-public class DDDRepository(IDbContext db)
+public class DDDRepository(IDbContext db) : IDDDRepository
 {
     public Task<bool> Exists(int DDD)
     {

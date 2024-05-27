@@ -7,6 +7,7 @@ builder.Services.AddMediator();
 
 builder.Services.AddScoped<IContactService, ContactService>();
 builder.Services.AddScoped<IContactRepository, ContactRepository>();
+builder.Services.AddScoped<IDDDRepository, DDDRepository>();
 builder.Services.AddScoped<IDbContext, DbContext>();
 
 var app = builder.Build();
