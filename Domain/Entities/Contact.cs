@@ -7,4 +7,5 @@ public class Contact : BaseEntity
     public string Email { get; set; } = string.Empty;
 
     public Contact(int id) => Id = id;
+    public Contact() { }
 }
