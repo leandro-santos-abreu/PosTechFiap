@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  posttechfiap.api:
+    image: ${DOCKER_REGISTRY-}posttechfiapapi
+    build:
+      context: .
+      dockerfile: PostTechFiap.Api/Dockerfile
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+  posttechfiap.api.database:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: PostTechFiap.Api.Database
+    environment:
+        - SA_PASSWORD=FiapPosTech2024
+        - ACCEPT_EULA=Y
+        - MSSQL_PID=Developer
+        - MSSQL_TCP_PORT=1433
+    ports:
+        - "1433:1433"

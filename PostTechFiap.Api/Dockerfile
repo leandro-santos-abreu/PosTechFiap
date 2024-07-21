@@ -10,7 +10,11 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["PostTechFiap.Api/PostTechFiap.Api.csproj", "PostTechFiap.Api/"]
-RUN dotnet restore "./PostTechFiap.Api/PostTechFiap.Api.csproj"
+COPY ["Application/Application.csproj", "Application/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Persistence/Persistence.csproj", "Persistence/"]
+COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+RUN dotnet restore "./PostTechFiap.Api/./PostTechFiap.Api.csproj"
 COPY . .
 WORKDIR "/src/PostTechFiap.Api"
 RUN dotnet build "./PostTechFiap.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build
