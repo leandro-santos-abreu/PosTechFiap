@@ -1,11 +1,10 @@
-﻿using Domain.Request;
+﻿using Domain.Entities;
+using Domain.Request;
 using PosTechFiap.Test.IntegrationTests.BaseClasses;
-using NUnit.Framework;
 using System.Net;
-using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace PosTechFiap.Test.IntegrationTests
 {
@@ -49,6 +48,11 @@ namespace PosTechFiap.Test.IntegrationTests
             var response = await _client.PostAsync(baseRoute, content);
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+            var getResponse = await _client.GetAsync(baseRoute);
+            var contacts = (await getResponse.Content.ReadFromJsonAsync<IEnumerable<Contact>>())!;
+
+            Assert.That(contacts.Count(), Is.EqualTo(1));
         }
     }
 }

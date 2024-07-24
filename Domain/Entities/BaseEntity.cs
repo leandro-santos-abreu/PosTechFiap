@@ -6,7 +6,7 @@ public interface IBaseEntity
 
 public abstract class BaseEntity : IEquatable<BaseEntity>
 {
-    public int Id { get; protected set; }
+    public int Id { get; set; }
 
     public BaseEntity(int id) => Id = id;
     protected BaseEntity() => Id = default!;
