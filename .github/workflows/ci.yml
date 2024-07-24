@@ -38,10 +38,10 @@ jobs:
         dotnet-version: 8.0.x
 
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore PosTechFiap.sln
 
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build PosTechFiap.sln --no-restore
 
     - name: Run tests
       env:
