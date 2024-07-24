@@ -11,7 +11,7 @@ namespace DatabaseMigration.Migrations
 
         public override void Down()
         {
-            Delete.Table("DDD");
+            Execute.Sql("DROP TABLE DDD");
         }
     }
 }

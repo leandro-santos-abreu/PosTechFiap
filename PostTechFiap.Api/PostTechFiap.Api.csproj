@@ -9,6 +9,10 @@
     <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
   </PropertyGroup>
 
+	<ItemGroup>
+		<InternalsVisibleTo Include="PosTechFiap.Test" />
+	</ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="FluentMigrator.Runner" Version="5.2.0" />
     <PackageReference Include="FluentMigrator.Runner.SqlServer" Version="5.2.0" />

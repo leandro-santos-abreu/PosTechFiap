@@ -23,7 +23,7 @@ namespace DatabaseMigration.Migrations
 
         public override void Down()
         {
-            Delete.Table("Contact");
+            Execute.Sql("DROP TABLE Contact");
         }
     }
 }

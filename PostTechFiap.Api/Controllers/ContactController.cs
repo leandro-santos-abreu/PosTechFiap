@@ -1,5 +1,6 @@
 namespace PosTechFiap.Controllers;
 
+[ApiController]
 [Route("api/[controller]")]
 public class ContactController(IMediator mediator) : ControllerBase
 {
