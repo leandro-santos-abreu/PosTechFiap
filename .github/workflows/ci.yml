@@ -46,4 +46,4 @@ jobs:
     - name: Run tests
       env:
         Settings__DbConnectionString: "Server=localhost,1433;Database=Teste;User Id=SA;Password=YourStrong!Passw0rd;"
-      run: dotnet test --no-build --verbosity normal
+      run: dotnet test PosTechFiap.sln --no-build --verbosity normal
