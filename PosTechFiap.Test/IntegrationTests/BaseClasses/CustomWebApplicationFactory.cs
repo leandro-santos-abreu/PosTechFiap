@@ -67,6 +67,9 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Startup>, IAsyn
 
     public async ValueTask DisposeAsync()
     {
+        if (!_configuration.GetValue<bool>("Settings:RunningCI"))
+            return;
+
         await _container.StopAsync();
         await _container.DisposeAsync();
     }
