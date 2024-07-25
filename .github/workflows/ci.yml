@@ -63,7 +63,7 @@ jobs:
       run: echo "Settings:DbConnectionString=Server=localhost,1433;Database=YourDatabaseName;User Id=SA;Password=YourStrong!Passw0rd;"
       
     - name: Run tests
-      run: dotnet test PosTechFiap.sln --no-build --verbosity detailed
+      run: dotnet test PosTechFiap.sln --no-build --verbosity normal
 
     - name: List all Docker containers after tests
       run: docker ps -a
