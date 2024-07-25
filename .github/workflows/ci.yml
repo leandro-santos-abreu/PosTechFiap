@@ -12,7 +12,22 @@ on:
 jobs:
   Build_Tests:
     runs-on: ubuntu-latest
-    
+    timeout-minutes: 20
+
+    services:
+          sqlserver:
+            image: mcr.microsoft.com/mssql/server:2019-latest
+            env:
+              SA_PASSWORD: "YourStrong!Passw0rd"
+              ACCEPT_EULA: "Y"
+            ports:
+              - 1433:1433
+            options: >-
+              --health-cmd "opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'YourStrong!Passw0rd' -Q 'SELECT 1' || exit 1"
+              --health-interval 10s
+              --health-start-period 30s
+              --health-timeout 5s
+              --health-retries 3
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -22,13 +37,41 @@ jobs:
       with:
         dotnet-version: 8.0.x
 
+    - name: Cache .NET packages
+      uses: actions/cache@v3
+      with:
+        path: ~/.nuget/packages
+        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-nuget-
+
     - name: Restore dependencies
       run: dotnet restore PosTechFiap.sln
 
     - name: Build
       run: dotnet build PosTechFiap.sln --no-restore
 
+    - name: Ensure Docker is running
+      run: |
+        sudo systemctl start docker
+        sudo systemctl status docker
+
+    - name: Set up CI Boolean
+      run: echo "Settings:RunningCI=true"
+      
+    - name: Set up SQL Server connection string
+      run: echo "Settings:DbConnectionString=Server=localhost,1433;Database=YourDatabaseName;User Id=SA;Password=YourStrong!Passw0rd;"
+      
     - name: Run tests
-      env:
-        Settings__DbConnectionString: "Server=localhost,1433;Database=Teste;User Id=SA;Password=YourStrong!Passw0rd;"
       run: dotnet test PosTechFiap.sln --no-build --verbosity normal
+
+    - name: List all Docker containers after tests
+      run: docker ps -a
+
+    - name: Get logs of all Docker containers
+      run: |
+        for container in $(docker ps -a -q); do
+          echo "Logs for container $container:"
+          docker logs $container
+        done
+
