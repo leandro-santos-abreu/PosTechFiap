@@ -14,7 +14,7 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Startup>, IAsyn
     private readonly TaskCompletionSource<string> _connectionStringTcs = new TaskCompletionSource<string>();
     private IServiceProvider? _serviceProvider;
     private IConfiguration _configuration = new ConfigurationBuilder()
-           .AddJsonFile("appsettings.test.json")
+           .AddJsonFile("appsettings.Test.json")
             .AddEnvironmentVariables()
             .Build();
     public CustomWebApplicationFactory()
