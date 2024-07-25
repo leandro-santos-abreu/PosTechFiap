@@ -10,24 +10,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  Build_Tests:
     runs-on: ubuntu-latest
-
-    services:
-      sqlserver:
-        image: mcr.microsoft.com/mssql/server:2019-latest
-        env:
-          SA_PASSWORD: "YourStrong!Passw0rd"
-          ACCEPT_EULA: "Y"
-        ports:
-          - 1433:1433
-        options: >-
-          --health-cmd "opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'YourStrong!Passw0rd' -Q 'SELECT 1' || exit 1"
-          --health-interval 10s
-          --health-start-period 30s
-          --health-timeout 5s
-          --health-retries 3
-
+    
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
