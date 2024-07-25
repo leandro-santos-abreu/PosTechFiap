@@ -23,7 +23,7 @@ jobs:
             ports:
               - 1433:1433
             options: >-
-              --health-cmd "opt/mssql-tools/bin/sqlcmd -S localhost -U SA -P 'YourStrong!Passw0rd' -Q 'SELECT 1' || exit 1"
+              --health-cmd "opt/mssql-tools/bin/sqlcmd -S 172.18.0.2 -U SA -P 'YourStrong!Passw0rd' -Q 'SELECT 1' || exit 1"
               --health-interval 10s
               --health-start-period 30s
               --health-timeout 5s
@@ -36,15 +36,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
-
-    - name: Cache .NET packages
-      uses: actions/cache@v3
-      with:
-        path: ~/.nuget/packages
-        key: ${{ runner.os }}-nuget-${{ hashFiles('**/packages.lock.json') }}
-        restore-keys: |
-          ${{ runner.os }}-nuget-
-
+        
     - name: Restore dependencies
       run: dotnet restore PosTechFiap.sln
 
@@ -58,13 +50,17 @@ jobs:
 
     - name: Update RunningCI in appsettings.Test.json
       run: |
-        jq '.Settings.RunningCI = true' appsettings.Test.json > tmp.json && mv tmp.json appsettings.Test.json
+        jq '.Settings.RunningCI = true' PosTechFiap.Test/appsettings.Test.json > PosTechFiap.Test/tmp.json
+          mv PosTechFiap.Test/tmp.json PosTechFiap.Test/appsettings.Test.json
       
-    - name: Update Connection String in appsettings.Test.json
+    - name: Update appsettings.Test.json
       run: |
-        jq '.Settings.DbConnectionString = "Server=localhost,1433;Database=YourDatabaseName;User Id=SA;Password=YourStrong!Passw0rd;"' appsettings.Test.json > tmp.json && mv tmp.json appsettings.Test.json
+        jq '.Settings.DbConnectionString = "Server=172.18.0.2,1433;Database=master;User Id=SA;Password=YourStrong!Passw0rd;"' PosTechFiap.Test/appsettings.Test.json > PosTechFiap.Test/tmp.json
+        mv PosTechFiap.Test/tmp.json PosTechFiap.Test/appsettings.Test.json
 
-      
+    - name: Print updated appsettings.Test.json
+      run: cat PosTechFiap.Test/appsettings.Test.json
+  
     - name: Run tests
       run: dotnet test PosTechFiap.sln --no-build --verbosity normal
 
