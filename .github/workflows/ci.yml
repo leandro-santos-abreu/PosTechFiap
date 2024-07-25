@@ -12,6 +12,7 @@ on:
 jobs:
   Build_Tests:
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     
     steps:
     - name: Checkout code
@@ -30,6 +31,3 @@ jobs:
 
     - name: Run tests
       run: dotnet test PosTechFiap.sln --no-build --verbosity normal
-
-    - name: List running containers
-      run: docker ps -a
