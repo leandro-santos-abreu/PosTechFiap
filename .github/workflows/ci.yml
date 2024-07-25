@@ -56,11 +56,14 @@ jobs:
         sudo systemctl start docker
         sudo systemctl status docker
 
-    - name: Set up CI Boolean
-      run: echo "Settings:RunningCI=true"
+    - name: Update RunningCI in appsettings.Test.json
+      run: |
+        jq '.Settings.RunningCI = true' appsettings.Test.json > tmp.json && mv tmp.json appsettings.Test.json
       
-    - name: Set up SQL Server connection string
-      run: echo "Settings:DbConnectionString=Server=localhost,1433;Database=YourDatabaseName;User Id=SA;Password=YourStrong!Passw0rd;"
+    - name: Update Connection String in appsettings.Test.json
+      run: |
+        jq '.Settings.DbConnectionString = "Server=localhost,1433;Database=YourDatabaseName;User Id=SA;Password=YourStrong!Passw0rd;"' appsettings.Test.json > tmp.json && mv tmp.json appsettings.Test.json
+
       
     - name: Run tests
       run: dotnet test PosTechFiap.sln --no-build --verbosity normal
