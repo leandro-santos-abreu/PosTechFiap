@@ -19,10 +19,10 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Startup>, IAsyn
             .Build();
     public CustomWebApplicationFactory()
     {
-        //_container = new MsSqlBuilder()
-        //    .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
-        //    .WithAutoRemove(true)
-        //    .Build();
+        _container = new MsSqlBuilder()
+            .WithImage("mcr.microsoft.com/mssql/server:2022-latest")
+            .WithAutoRemove(true)
+            .Build();
     }
 
     protected override void ConfigureWebHost(IWebHostBuilder builder)
