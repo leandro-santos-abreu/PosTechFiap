@@ -56,6 +56,12 @@ jobs:
         sudo systemctl start docker
         sudo systemctl status docker
 
+    - name: Set up CI Boolean
+      run: echo "Settings:RunningCI=true"
+      
+    - name: Set up SQL Server connection string
+      run: echo "Settings:DbConnectionString=Server=localhost,1433;Database=YourDatabaseName;User Id=SA;Password=YourStrong!Passw0rd;"
+      
     - name: Run tests
       run: dotnet test PosTechFiap.sln --no-build --verbosity detailed
 
