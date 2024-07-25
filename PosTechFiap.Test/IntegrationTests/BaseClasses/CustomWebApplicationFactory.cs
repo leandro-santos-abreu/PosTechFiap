@@ -37,8 +37,15 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Startup>, IAsyn
 
     public async Task InitializeAsync()
     {
+        Console.WriteLine("Starting SQL Server container...");
+
         await _container.StartAsync();
+        if (_container.State != DotNet.Testcontainers.Containers.TestcontainersStates.Running)
+            throw new Exception("Failed to start  SQL Server container.");
+
         _connectionStringTcs.SetResult(_container.GetConnectionString());
+
+        Console.WriteLine("SQL Server container started. Waiting for it to be ready...");
 
         // Build service provider and apply migrations
         _serviceProvider = Services;
@@ -46,6 +53,8 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Startup>, IAsyn
         var migrator = scope.ServiceProvider.GetService<IMigrationRunner>()
             ?? throw new InvalidOperationException("IMigrationRunner service is not registered.");
         migrator.MigrateUp();
+
+        Console.WriteLine("Migrations Applied! SQL Server is ready.");
     }
 
     public async ValueTask DisposeAsync()
