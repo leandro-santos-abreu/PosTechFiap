@@ -13,7 +13,10 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Startup>, IAsyn
     private readonly MsSqlContainer _container;
     private readonly TaskCompletionSource<string> _connectionStringTcs = new TaskCompletionSource<string>();
     private IServiceProvider? _serviceProvider;
-
+    private IConfiguration _configuration = new ConfigurationBuilder()
+           .AddJsonFile("appsettings.test.json")
+            .AddEnvironmentVariables()
+            .Build();
     public CustomWebApplicationFactory()
     {
         _container = new MsSqlBuilder()
@@ -25,27 +28,32 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Startup>, IAsyn
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         builder.UseEnvironment("Test");
-        builder.ConfigureAppConfiguration((context, config) =>
-        {
-            var connectionString = _connectionStringTcs.Task.Result;
-            config.AddInMemoryCollection(new[]
+        if (!_configuration.GetValue<bool>("Settings:RunningCI"))
+            builder.ConfigureAppConfiguration((context, config) =>
             {
-            new KeyValuePair<string, string>("Settings:DbConnectionString", connectionString)
+                var connectionString = _connectionStringTcs.Task.Result;
+                config.AddInMemoryCollection(new[]
+                {
+                new KeyValuePair<string, string>("Settings:DbConnectionString", connectionString)
+                });
             });
-        });
     }
 
     public async Task InitializeAsync()
     {
-        Console.WriteLine("Starting SQL Server container...");
+        if (!_configuration.GetValue<bool>("Settings:RunningCI"))
+        {
+            Console.WriteLine("Starting SQL Server container...");
 
-        await _container.StartAsync();
-        if (_container.State != DotNet.Testcontainers.Containers.TestcontainersStates.Running)
-            throw new Exception("Failed to start  SQL Server container.");
+            await _container.StartAsync();
+            if (_container.State != DotNet.Testcontainers.Containers.TestcontainersStates.Running)
+                throw new Exception("Failed to start  SQL Server container.");
 
-        _connectionStringTcs.SetResult(_container.GetConnectionString());
+            _connectionStringTcs.SetResult(_container.GetConnectionString());
 
-        Console.WriteLine("SQL Server container started. Waiting for it to be ready...");
+            Console.WriteLine("SQL Server container started. Waiting for it to be ready...");
+
+        }
 
         // Build service provider and apply migrations
         _serviceProvider = Services;
@@ -62,4 +70,5 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Startup>, IAsyn
         await _container.StopAsync();
         await _container.DisposeAsync();
     }
+
 }
