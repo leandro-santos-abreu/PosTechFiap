@@ -48,6 +48,9 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore PosTechFiap.sln
 
+    - name: List files
+      run: ls -la
+
     - name: Build
       run: dotnet build PosTechFiap.sln --no-restore
 
