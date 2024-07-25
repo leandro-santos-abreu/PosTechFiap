@@ -57,7 +57,7 @@ jobs:
         sudo systemctl status docker
 
     - name: Run tests
-      run: dotnet test src/PosTechFiap.Test.csproj --no-build --verbosity detailed
+      run: dotnet test PosTechFiap.sln --no-build --verbosity detailed
 
     - name: List all Docker containers after tests
       run: docker ps -a
