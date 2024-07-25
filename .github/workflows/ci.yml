@@ -47,19 +47,6 @@ jobs:
       run: |
         sudo systemctl start docker
         sudo systemctl status docker
-
-    - name: Update RunningCI in appsettings.Test.json
-      run: |
-        jq '.Settings.RunningCI = true' PosTechFiap.Test/appsettings.Test.json > PosTechFiap.Test/tmp.json
-          mv PosTechFiap.Test/tmp.json PosTechFiap.Test/appsettings.Test.json
-      
-    - name: Update appsettings.Test.json
-      run: |
-        jq '.Settings.DbConnectionString = "Server=172.18.0.2,1433;Database=master;User Id=SA;Password=YourStrong!Passw0rd;"' PosTechFiap.Test/appsettings.Test.json > PosTechFiap.Test/tmp.json
-        mv PosTechFiap.Test/tmp.json PosTechFiap.Test/appsettings.Test.json
-
-    - name: Print updated appsettings.Test.json
-      run: cat PosTechFiap.Test/appsettings.Test.json
   
     - name: Run tests
       run: dotnet test PosTechFiap.sln --no-build --verbosity normal
