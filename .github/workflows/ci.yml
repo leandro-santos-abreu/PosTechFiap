@@ -12,7 +12,7 @@ on:
 jobs:
   Build_Tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 20  # Increase timeout to 20 minutes
     
     steps:
     - name: Checkout code
@@ -29,5 +29,23 @@ jobs:
     - name: Build
       run: dotnet build PosTechFiap.sln --no-restore
 
+    - name: Ensure Docker is running
+      run: |
+        sudo systemctl start docker
+        sudo systemctl status docker
+
+    - name: List all Docker containers
+      run: docker ps -a
+
     - name: Run tests
       run: dotnet test PosTechFiap.sln --no-build --verbosity normal
+
+    - name: List all Docker containers after tests
+      run: docker ps -a
+
+    - name: Get logs of all Docker containers
+      run: |
+        for container in $(docker ps -a -q); do
+          echo "Logs for container $container:"
+          docker logs $container
+        done
