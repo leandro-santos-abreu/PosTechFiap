@@ -58,7 +58,7 @@ jobs:
       
     - name: Update appsettings.Test.json
       run: |
-        jq '.Settings.DbConnectionString = "Server=localhost,1433;Database=YourDatabaseName;User Id=SA;Password=YourStrong!Passw0rd;"' PosTechFiap.Test/appsettings.Test.json > PosTechFiap.Test/tmp.json
+        jq '.Settings.DbConnectionString = "Server=localhost,1433;Database=master;User Id=SA;Password=YourStrong!Passw0rd;"' PosTechFiap.Test/appsettings.Test.json > PosTechFiap.Test/tmp.json
         mv PosTechFiap.Test/tmp.json PosTechFiap.Test/appsettings.Test.json
 
     - name: Print updated appsettings.Test.json
