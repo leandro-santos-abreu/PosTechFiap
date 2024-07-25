@@ -47,7 +47,7 @@ public class MediatorTest
 
         var result = await createContactCommandHandler.Handle(request, token);
 
-        Assert.Equals(result, true);
+        Assert.That(result, Is.EqualTo(true));
     }
 
     [Test]
@@ -59,7 +59,7 @@ public class MediatorTest
 
         var result = await updateContactCommandHandler.Handle(request, token);
 
-        Assert.Equals(result, true);
+        Assert.That(result, Is.EqualTo(true));
     }
 
     [Test]
@@ -69,6 +69,6 @@ public class MediatorTest
 
         var result = await deleteContactCommandHandler.Handle(command, token);
 
-        Assert.Equals(result, true);
+        Assert.That(result, Is.EqualTo(true));
     }
 }

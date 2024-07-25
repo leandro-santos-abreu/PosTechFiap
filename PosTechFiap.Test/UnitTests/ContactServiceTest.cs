@@ -61,7 +61,7 @@ public class ContactServiceTest
 
         var result = await _contactService.Create(request);
 
-        Assert.Equals(result, true);
+        Assert.That(result, Is.EqualTo(true));
     }
 
     [Test]
@@ -73,7 +73,7 @@ public class ContactServiceTest
 
         var result = await _contactService.Update(request);
 
-        Assert.Equals(result, true);
+        Assert.That(result, Is.EqualTo(true));
     }
 
     [Test]
@@ -83,6 +83,6 @@ public class ContactServiceTest
 
         var result = await _contactService.Delete(contactIdToDelete);
 
-        Assert.Equals(result, true);
+        Assert.That(result, Is.EqualTo(true));
     }
 }
