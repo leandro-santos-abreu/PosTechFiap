@@ -29,6 +29,7 @@ jobs:
       run: dotnet build PosTechFiap.sln --no-restore
 
     - name: Run tests
-      env:
-        Settings__DbConnectionString: "Server=localhost,1433;Database=Teste;User Id=SA;Password=YourStrong!Passw0rd;"
       run: dotnet test PosTechFiap.sln --no-build --verbosity normal
+
+    - name: List running containers
+      run: docker ps -a
