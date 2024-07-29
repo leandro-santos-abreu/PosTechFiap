@@ -7,8 +7,16 @@ services:
       context: .
       dockerfile: PostTechFiap.Api/Dockerfile
     ports:
-      - "5000:5000"
-      - "5001:5001"
+      - "8080:8080"  # Map HTTP port
+      - "8443:8443"  # Map HTTPS port
+    networks:
+      - localprom
+    volumes:
+      - F:/PosTechFiap/https-certificate/certificate.pfx:/app/certificate.pfx
+    environment:
+      - ASPNETCORE_URLS=http://*:8080;https://*:8443
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/src/https-certificatecertificate.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=admin
   posttechfiap.api.database:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: PostTechFiap.Api.Database
@@ -19,3 +27,30 @@ services:
         - MSSQL_TCP_PORT=1433
     ports:
         - "1433:1433"
+    networks:
+      - localprom
+  prometheus:
+    image: prom/prometheus
+    user: root
+    container_name: prometheus
+    restart: unless-stopped
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+    networks:
+      - localprom
+    ports:
+      - 9090:9090
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    environment:
+      -  GF_SECURITY_ADMIN_PASSWORD=admin
+    hostname: grafana
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    networks:
+      - localprom
+networks:
+  localprom:
+    driver: bridge

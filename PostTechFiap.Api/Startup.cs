@@ -1,5 +1,6 @@
 ﻿using DatabaseMigration.Migrations;
 using FluentMigrator.Runner;
+using Prometheus;
 
 namespace PostTechFiap.Api;
 
@@ -38,8 +39,6 @@ public class Startup
         if (env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
-            app.UseSwagger();
-            app.UseSwaggerUI();
         }
         else
         {
@@ -47,13 +46,23 @@ public class Startup
             app.UseHsts();
         }
 
-        app.UseHttpsRedirection();
+        //app.UseHttpsRedirection();
         app.UseRouting();
         app.UseAuthorization();
+        app.UseMetricServer("/metrics");
+
+        app.UseSwagger();
+        app.UseSwaggerUI(c =>
+        {
+            c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            c.RoutePrefix = "swagger"; // Set to an empty string to serve Swagger at the app's root
+        });
+
 
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapMetrics();
         });
 
         if (env.EnvironmentName != "Test")

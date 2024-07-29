@@ -1,16 +1,19 @@
-#See https://aka.ms/customizecontainer to learn how to customize your debug container and how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
-USER app
 WORKDIR /app
 EXPOSE 8080
-EXPOSE 8081
+EXPOSE 8443
+
+ENV ASPNETCORE_URLS=http://*:8080;https://*:8443
 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["PostTechFiap.Api/PostTechFiap.Api.csproj", "PostTechFiap.Api/"]
-RUN dotnet restore "./PostTechFiap.Api/PostTechFiap.Api.csproj"
+COPY ["Application/Application.csproj", "Application/"]
+COPY ["Domain/Domain.csproj", "Domain/"]
+COPY ["Persistence/Persistence.csproj", "Persistence/"]
+COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
+RUN dotnet restore "./PostTechFiap.Api/./PostTechFiap.Api.csproj"
 COPY . .
 WORKDIR "/src/PostTechFiap.Api"
 RUN dotnet build "./PostTechFiap.Api.csproj" -c $BUILD_CONFIGURATION -o /app/build

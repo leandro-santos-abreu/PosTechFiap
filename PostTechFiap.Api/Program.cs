@@ -15,13 +15,26 @@ public class Program
                 config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
                 config.AddJsonFile($"appsettings.{context.HostingEnvironment.EnvironmentName}.json", optional: true);
                 config.AddEnvironmentVariables();
+
                 if (args != null)
                 {
                     config.AddCommandLine(args);
                 }
+
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {
+                webBuilder.ConfigureKestrel(serverOptions =>
+                {
+                    serverOptions.ListenAnyIP(8080);  // HTTP port
+                    serverOptions.ListenAnyIP(8443, listenOptions =>  // HTTPS port
+                    {
+                        var certPath = Environment.GetEnvironmentVariable("ASPNETCORE_Kestrel__Certificates__Default__Path");
+                        var certPassword = Environment.GetEnvironmentVariable("ASPNETCORE_Kestrel__Certificates__Default__Password");
+                        listenOptions.UseHttps(certPath, certPassword);
+                    });
+                });
+
                 webBuilder.UseStartup<Startup>();
             });
 }
