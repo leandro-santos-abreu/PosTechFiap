@@ -12,7 +12,7 @@ services:
     networks:
       - localprom
     volumes:
-      - F:/PosTechFiap/https-certificate/certificate.pfx:/app/certificate.pfx
+      - ./https-certificate/certificate.pfx:/app/certificate.pfx
     environment:
       - ASPNETCORE_URLS=http://*:8080;https://*:8443
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/src/https-certificatecertificate.pfx
@@ -44,13 +44,35 @@ services:
     image: grafana/grafana
     container_name: grafana
     environment:
-      -  GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/dashboards/maindashboard.json
     hostname: grafana
     restart: unless-stopped
+    volumes:
+      - ./grafana/provisioning:/etc/grafana/provisioning
+      - ./grafana/dashboards:/etc/grafana/dashboards
     ports:
-      - 3000:3000
+      - 3000:3000 
     networks:
       - localprom
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: node-exporter
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - 9100:9100
+    volumes:
+      - "/proc:/host/proc:ro"
+      - "/sys:/host/sys:ro"
+      - "/:/rootfs:ro"
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"' 
+    networks:
+      - localprom
+
 networks:
   localprom:
     driver: bridge

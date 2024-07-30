@@ -25,7 +25,10 @@ public class ContactRepository(IDbContext db) : IContactRepository
 
     public async Task<bool> Delete(int id)
     {
-        return await db.Context.ExecuteScalarAsync<bool>(ContactSql.Delete, new { id });
+        var parameters = new DynamicParameters();
+        parameters.Add("@id", id);
+
+        return !await db.Context.ExecuteScalarAsync<bool>(ContactSql.Delete, parameters);
     }
 
     public async Task<bool> Update(int Id, string Telephone, string Name, int DDD, string Email)
