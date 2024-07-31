@@ -9,6 +9,3 @@ datasources:
     org_id: 1
     uid: "8rTXXfF4z"
     is_default: true
-    jsonData:
-      manageAlerts: true
-      httpMethod: POST

@@ -7,8 +7,8 @@ services:
       context: .
       dockerfile: PostTechFiap.Api/Dockerfile
     ports:
-      - "8080:8080"  # Map HTTP port
-      - "8443:8443"  # Map HTTPS port
+      - "8080:8080" 
+      - "8443:8443"  
     networks:
       - localprom
     volumes:
@@ -47,6 +47,9 @@ services:
       - GF_SECURITY_ADMIN_PASSWORD=admin
       - GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH=/etc/grafana/dashboards/maindashboard.json
     hostname: grafana
+    depends_on:
+      - prometheus
+      - node-exporter
     restart: unless-stopped
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning
@@ -60,6 +63,7 @@ services:
     container_name: node-exporter
     restart: unless-stopped
     privileged: true
+    pid: host
     ports:
       - 9100:9100
     volumes:
@@ -68,6 +72,7 @@ services:
       - "/:/rootfs:ro"
     command:
       - '--path.procfs=/host/proc'
+      - '--path.rootfs=/host'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"' 
     networks:
