@@ -17,6 +17,23 @@ services:
       - ASPNETCORE_URLS=http://*:8080;https://*:8443
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/src/https-certificatecertificate.pfx
       - ASPNETCORE_Kestrel__Certificates__Default__Password=admin
+  posttechfiap.api.consumer:
+    image: ${DOCKER_REGISTRY-}consumer
+    container_name: PostTechFiap.Api.Consumer
+    build:
+      context: .
+      dockerfile: Consumer/Dockerfile
+    ports:
+      - "1010:1010" 
+    networks:
+      - localprom
+    volumes:
+      - ./https-certificate/certificate.pfx:/app/certificate.pfx
+    environment:
+      - ASPNETCORE_URLS=http://*:8080;https://*:8443
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/src/https-certificatecertificate.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=admin
+
   posttechfiap.api.database:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: PostTechFiap.Api.Database
@@ -75,6 +92,19 @@ services:
       - '--path.rootfs=/host'
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"' 
+    networks:
+      - localprom
+  rabbitMQ:
+    image: masstransit/rabbitmq
+    container_name: rabbitMQ
+    restart: unless-stopped
+    privileged: true
+    ports:
+      - 15672:15672
+      - 5672:5672
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
       - localprom
 
