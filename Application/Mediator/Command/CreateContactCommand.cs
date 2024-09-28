@@ -1,7 +1,4 @@
 ﻿using MassTransit;
-using RabbitMQ.Client;
-using System.Text;
-using System.Text.Json;
 
 namespace Application.Mediator.Command;
 public record CreateContactCommand(string Name, int DDD, string Telephone, string Email) : IRequest<bool>;

@@ -23,6 +23,15 @@ public class ContactRepository(IDbContext db) : IContactRepository
         return await db.Context.ExecuteScalarAsync<bool>(ContactSql.Exists, parameters);
     }
 
+    public async Task<bool> ExistsById(int id)
+    {
+        var parameters = new DynamicParameters();
+        parameters.Add("@ID", id);
+
+        return await db.Context.ExecuteScalarAsync<bool>(ContactSql.ExistsById, parameters);
+    }
+
+
     public async Task<bool> Delete(int id)
     {
         var parameters = new DynamicParameters();

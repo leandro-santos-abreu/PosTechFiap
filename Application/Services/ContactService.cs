@@ -14,6 +14,7 @@ public class ContactService(IContactRepository contactRepository, IDDDRepository
     }
 
     public async Task<bool> Exists(int DDD, string Telephone) => await contactRepository.Exists(DDD, Telephone);
+    public async Task<bool> ExistsById(int id) => await contactRepository.ExistsById(id);
 
     public async Task<bool> Update(UpdateContactCommand request)
     {

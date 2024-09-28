@@ -23,6 +23,8 @@
 
 	<ItemGroup>
     <PackageReference Include="coverlet.collector" Version="6.0.0" />
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="7.3.1" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="8.2.5" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" Version="8.0.7" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.7" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.8.0" />
@@ -31,11 +33,15 @@
     <PackageReference Include="NUnit.Analyzers" Version="3.9.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="4.5.0" />
     <PackageReference Include="Testcontainers.MsSql" Version="3.9.0" />
+    <PackageReference Include="Testcontainers.RabbitMq" Version="3.10.0" />
     <PackageReference Include="xunit.extensibility.core" Version="2.9.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Application\Application.csproj" />
+    <ProjectReference Include="..\Consumers\CreateContactCommandConsumer\CreateContactCommandConsumer.csproj" />
+    <ProjectReference Include="..\Consumers\DeleteContactCommandConsumer\DeleteContactCommandConsumer.csproj" />
+    <ProjectReference Include="..\Consumers\UpdateContactCommandConsumer\UpdateContactCommandConsumer.csproj" />
     <ProjectReference Include="..\Persistence\Persistence.csproj" />
     <ProjectReference Include="..\PostTechFiap.Api\PostTechFiap.Api.csproj" />
   </ItemGroup>

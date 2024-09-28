@@ -9,15 +9,15 @@ using System.Text.Json;
 using System.Threading.Tasks;
 using static MassTransit.Monitoring.Performance.BuiltInCounters;
 
-namespace Consumer.Consumers
+namespace Consumer
 {
-    public class CreateContactCommandConsumer(IContactService contactService) : IConsumer<CreateContactCommand>
+    public class DeleteContactCommandConsumer(IContactService contactService) : IConsumer<DeleteContactCommand>
     {
         private readonly IContactService _contactService = contactService;
 
-        public async Task Consume(ConsumeContext<CreateContactCommand> context)
+        public async Task Consume(ConsumeContext<DeleteContactCommand> context)
         {
-            await _contactService.Create(context.Message!);
+            await _contactService.Delete(context.Message.Id!);
 
         }
     }

@@ -17,14 +17,14 @@ services:
       - ASPNETCORE_URLS=http://*:8080;https://*:8443
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/src/https-certificatecertificate.pfx
       - ASPNETCORE_Kestrel__Certificates__Default__Password=admin
-  posttechfiap.api.consumer:
-    image: ${DOCKER_REGISTRY-}consumer
-    container_name: PostTechFiap.Api.Consumer
+  posttechfiap.api.createcontactcommandconsumer:
+    image: ${DOCKER_REGISTRY-}consumers/createcontactcommandconsumer/createcontactcommandconsumer
+    container_name: PostTechFiap.Api.CreateContactCommandConsumer
     build:
       context: .
-      dockerfile: Consumer/Dockerfile
+      dockerfile: Consumers/CreateContactCommandConsumer/Dockerfile
     ports:
-      - "1010:1010" 
+      - "1001:1001" 
     networks:
       - localprom
     volumes:
@@ -33,7 +33,38 @@ services:
       - ASPNETCORE_URLS=http://*:8080;https://*:8443
       - ASPNETCORE_Kestrel__Certificates__Default__Path=/src/https-certificatecertificate.pfx
       - ASPNETCORE_Kestrel__Certificates__Default__Password=admin
-
+  posttechfiap.api.updatecontactcommandconsumer:
+    image: ${DOCKER_REGISTRY-}consumers/updatecontactcommandconsumer/updatecontactcommandconsumer
+    container_name: PostTechFiap.Api.UpdateContactCommandConsumer
+    build:
+      context: .
+      dockerfile: Consumers/UpdateContactCommandConsumer/Dockerfile
+    ports:
+      - "1002:1002" 
+    networks:
+      - localprom
+    volumes:
+      - ./https-certificate/certificate.pfx:/app/certificate.pfx
+    environment:
+      - ASPNETCORE_URLS=http://*:8080;https://*:8443
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/src/https-certificatecertificate.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=admin
+  posttechfiap.api.deletecontactcommandconsumer:
+    image: ${DOCKER_REGISTRY-}consumers/deletecontactcommandconsumer/deletecontactcommandconsumer
+    container_name: PostTechFiap.Api.DeleteContactCommandConsumer
+    build:
+      context: .
+      dockerfile: Consumers/DeleteContactCommandConsumer/Dockerfile
+    ports:
+      - "1003:1003" 
+    networks:
+      - localprom
+    volumes:
+      - ./https-certificate/certificate.pfx:/app/certificate.pfx
+    environment:
+      - ASPNETCORE_URLS=http://*:8080;https://*:8443
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/src/https-certificatecertificate.pfx
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=admin
   posttechfiap.api.database:
     image: mcr.microsoft.com/mssql/server:2022-latest
     container_name: PostTechFiap.Api.Database

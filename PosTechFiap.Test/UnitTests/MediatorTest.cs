@@ -1,6 +1,8 @@
 ﻿using Application.Contracts;
 using Application.Mediator.Command;
 using Domain.Entities;
+using MassTransit;
+using MassTransit.Transports;
 using Moq;
 
 namespace PosTechFiap.Test.UnitTests;
@@ -12,6 +14,7 @@ public class MediatorTest
     private readonly DeleteContactCommandHandler deleteContactCommandHandler;
     private readonly UpdateContactCommandHandler updateContactCommandHandler;
     private readonly Mock<IContactService> _contactService = new Mock<IContactService>();
+    private readonly Mock<IBus> _busMock = new Mock<IBus>();
     private readonly CancellationToken token = new CancellationToken();
     private IEnumerable<Contact> contacts;
 
@@ -24,9 +27,12 @@ public class MediatorTest
             new Contact (3){Name = "Mike Johnson", Email = "mike.johnson@example.com", DDD = 14, Telephone = "912162549"}
         };
 
-        createContactCommandHandler = new CreateContactCommandHandler(_contactService.Object);
-        deleteContactCommandHandler = new DeleteContactCommandHandler(_contactService.Object);
-        updateContactCommandHandler = new UpdateContactCommandHandler(_contactService.Object);
+        createContactCommandHandler = new CreateContactCommandHandler(_contactService.Object, _busMock.Object);
+        deleteContactCommandHandler = new DeleteContactCommandHandler(_contactService.Object, _busMock.Object);
+        updateContactCommandHandler = new UpdateContactCommandHandler(_contactService.Object, _busMock.Object);
+
+        _busMock.Setup(x => x.GetSendEndpoint(It.IsAny<Uri>())).Returns(Task.FromResult(new Mock<ISendEndpoint>().Object));
+        _contactService.Setup(x => x.ExistsById(It.IsAny<int>())).Returns(Task.FromResult(true));
     }
 
     [SetUp]

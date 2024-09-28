@@ -1,10 +1,8 @@
 using Application.Contracts;
 using Application.Services;
 using Consumer;
-using Consumer.Consumers;
 using Infrastructure.Context;
 using MassTransit;
-using Microsoft.Extensions.Configuration;
 using Persistence.Contract;
 using Persistence.Repositories;
 
@@ -18,7 +16,7 @@ var builder = Host.CreateDefaultBuilder(args).ConfigureServices((hostContext, se
 
     services.AddMassTransit(x =>
     {
-        x.AddConsumer<CreateContactCommandConsumer>();
+        x.AddConsumer<UpdateContactCommandConsumer>();
         x.UsingRabbitMq((context, cfg) =>
         {
             cfg.Host(new Uri(servidor), "/", h =>
@@ -27,9 +25,9 @@ var builder = Host.CreateDefaultBuilder(args).ConfigureServices((hostContext, se
                 h.Password(senha);
             });
 
-            cfg.ReceiveEndpoint("CreateContact", e =>
+            cfg.ReceiveEndpoint("UpdateContact", e =>
             {
-                e.ConfigureConsumer<CreateContactCommandConsumer>(context);
+                e.ConfigureConsumer<UpdateContactCommandConsumer>(context);
             });
 
             cfg.ConfigureEndpoints(context);
