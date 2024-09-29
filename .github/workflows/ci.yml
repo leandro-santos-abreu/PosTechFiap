@@ -28,7 +28,9 @@ jobs:
               --health-start-period 30s
               --health-timeout 5s
               --health-retries 3
-              
+            volumes: 
+                - /var/lib/docker/volumes/mssql_db/_data:/var/opt/mssql
+
           rabbitmq:
             image: masstransit/rabbitmq
             ports:
