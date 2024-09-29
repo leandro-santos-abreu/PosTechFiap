@@ -20,6 +20,7 @@ jobs:
             env:
               SA_PASSWORD: "YourStrong!Passw0rd"
               ACCEPT_EULA: "Y"
+              MSSQL_AGENT_ROOT: "true"
             ports:
               - 1433:1433
             options: >-
