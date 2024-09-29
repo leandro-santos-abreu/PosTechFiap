@@ -37,6 +37,7 @@ jobs:
               - 5672:5672
               - 15672:15672
             options: >-
+              --privileged
               --health-cmd "curl -f http://localhost:15672 || exit 1"
               --health-interval 10s
               --health-timeout 5s
