@@ -22,23 +22,23 @@ jobs:
               ACCEPT_EULA: "Y"
             ports:
               - 1433:1433
-            options: >-
-              --health-cmd "opt/mssql-tools/bin/sqlcmd -S 172.18.0.2 -U SA -P 'YourStrong!Passw0rd' -Q 'SELECT 1' || exit 1"
-              --health-interval 10s
-              --health-start-period 30s
-              --health-timeout 5s
-              --health-retries 3
+            # options: >-
+            #   --health-cmd "opt/mssql-tools/bin/sqlcmd -S 172.18.0.2 -U SA -P 'YourStrong!Passw0rd' -Q 'SELECT 1' || exit 1"
+            #   --health-interval 10s
+            #   --health-start-period 30s
+            #   --health-timeout 5s
+            #   --health-retries 3
               
-          # rabbitmq:
-          #   image: masstransit/rabbitmq
-          #   ports:
-          #     - 5672:5672
-          #     - 15672:15672
-          #   options: >-
-          #     --health-cmd "curl -f http://localhost:15672 || exit 1"
-          #     --health-interval 10s
-          #     --health-timeout 5s
-          #     --health-retries 5
+          rabbitmq:
+            image: masstransit/rabbitmq
+            ports:
+              - 5672:5672
+              - 15672:15672
+            options: >-
+              --health-cmd "curl -f http://localhost:15672 || exit 1"
+              --health-interval 10s
+              --health-timeout 5s
+              --health-retries 5
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
