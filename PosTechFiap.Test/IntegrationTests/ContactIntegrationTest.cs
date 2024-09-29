@@ -1,5 +1,6 @@
 ﻿using Domain.Entities;
 using Domain.Request;
+using Microsoft.AspNetCore.Mvc.Testing;
 using PosTechFiap.Test.IntegrationTests.BaseClasses;
 using System.Net;
 using System.Net.Http.Json;
@@ -28,12 +29,13 @@ namespace PosTechFiap.Test.IntegrationTests
         public async Task OneTimeTearDown()
         {
             await _factory.DisposeAsync();
-            _client.Dispose();
+            _client?.Dispose();
         }
 
         [Test]
         public async Task ShouldAddContactSuccessfully()
         {
+
             var request = new CreateContactRequest()
             {
                 DDD = 21,
@@ -48,6 +50,8 @@ namespace PosTechFiap.Test.IntegrationTests
             var response = await _client.PostAsync(baseRoute, content);
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+            await Task.Delay(500);
 
             var getResponse = await _client.GetAsync($"{baseRoute}?DDD={21}");
             var contacts = (await getResponse.Content.ReadFromJsonAsync<IEnumerable<Contact>>())!;
@@ -73,6 +77,8 @@ namespace PosTechFiap.Test.IntegrationTests
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
+            await Task.Delay(500);
+
             var getResponse = await _client.GetAsync($"{baseRoute}?DDD={22}");
             var contact = (await getResponse.Content.ReadFromJsonAsync<IEnumerable<Contact>>())?.FirstOrDefault()!;
             contact.Name = "Test_Update";
@@ -91,6 +97,8 @@ namespace PosTechFiap.Test.IntegrationTests
 
             response = await _client.PutAsync(baseRoute, content);
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+            await Task.Delay(500);
 
             getResponse = await _client.GetAsync($"{baseRoute}?DDD={22}");
             contact = (await getResponse.Content.ReadFromJsonAsync<IEnumerable<Contact>>())?.FirstOrDefault()!;
@@ -116,6 +124,8 @@ namespace PosTechFiap.Test.IntegrationTests
 
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
 
+            await Task.Delay(500);
+
             var getResponse = await _client.GetAsync($"{baseRoute}?DDD={27}");
             var contacts = (await getResponse.Content.ReadFromJsonAsync<IEnumerable<Contact>>())!;
 
@@ -123,6 +133,8 @@ namespace PosTechFiap.Test.IntegrationTests
 
             response = await _client.DeleteAsync($"{baseRoute}?id={contacts?.FirstOrDefault()?.Id}");
             Assert.That(response.StatusCode, Is.EqualTo(HttpStatusCode.OK));
+
+            await Task.Delay(500);
 
             getResponse = await _client.GetAsync($"{baseRoute}?DDD={27}");
             contacts = (await getResponse.Content.ReadFromJsonAsync<IEnumerable<Contact>>())!;

@@ -36,6 +36,16 @@ public class ContactSql
             [DDD] = @DDD AND [Telephone] = @Telephone
     ";
 
+    public static readonly string ExistsById = @"
+        SELECT 
+            1
+        FROM 
+            [dbo].[Contact] 
+        WHERE 
+            [Id] = @ID
+    ";
+
+
     public static readonly string Update = @"
         UPDATE 
             [dbo].[Contact]

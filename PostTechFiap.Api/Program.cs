@@ -31,7 +31,7 @@ public class Program
                     {
                         var certPath = Environment.GetEnvironmentVariable("ASPNETCORE_Kestrel__Certificates__Default__Path");
                         var certPassword = Environment.GetEnvironmentVariable("ASPNETCORE_Kestrel__Certificates__Default__Password");
-                        listenOptions.UseHttps(certPath, certPassword);
+                        listenOptions.UseHttps(certPath!, certPassword);
                     });
                 });
 

@@ -1,5 +1,7 @@
 ﻿using DatabaseMigration.Migrations;
 using FluentMigrator.Runner;
+using MassTransit;
+using Microsoft.IdentityModel.Tokens;
 using Prometheus;
 
 namespace PostTechFiap.Api;
@@ -31,6 +33,25 @@ public class Startup
         services.AddScoped<IContactRepository, ContactRepository>();
         services.AddScoped<IDDDRepository, DDDRepository>();
         services.AddScoped<IContactService, ContactService>();
+
+        var servidor = Configuration.GetSection("MassTransit")["Servidor"] ?? string.Empty;
+        var usuario = Configuration.GetSection("MassTransit")["Usuario"] ?? string.Empty;
+        var senha = Configuration.GetSection("MassTransit")["Senha"] ?? string.Empty;
+
+        if (Configuration.GetValue<string>("Enviroment").IsNullOrEmpty())
+            services.AddMassTransit(x =>
+            {
+                x.UsingRabbitMq((context, cfg) =>
+                {
+                    cfg.Host(new Uri(servidor), "/", h =>
+                    {
+                        h.Username(usuario);
+                        h.Password(senha);
+                    });
+
+                    cfg.ConfigureEndpoints(context);
+                });
+            });
     }
 
 
