@@ -108,9 +108,13 @@ public class CustomWebApplicationFactory : WebApplicationFactory<Startup>, IAsyn
 
             Console.WriteLine("SQL Server container started. Waiting for it to be ready...");
 
-        }
+            Console.WriteLine("Starting RabbitMQ Container...");
 
-        await _rabbitMqContainer.StartAsync();
+            await _rabbitMqContainer.StartAsync();
+
+            Console.WriteLine("RabbitMQ container started. Waiting for it to be ready...");
+
+        }
 
         // Build service provider and apply migrations
         _serviceProvider = Services;
