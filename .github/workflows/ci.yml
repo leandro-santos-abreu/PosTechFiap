@@ -28,17 +28,6 @@ jobs:
               --health-start-period 30s
               --health-timeout 5s
               --health-retries 3
-          rabbitmq:
-            image: masstransit/rabbitmq
-            ports:
-               - 5672:5672
-               - 15672:15672
-            options: >-
-              --privileged
-              --health-cmd "curl -f http://localhost:15672 || exit 1"
-              --health-interval 10s
-              --health-timeout 5s
-              --health-retries 5
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
