@@ -16,13 +16,14 @@ jobs:
 
     services:
       sqlserver:
-        user: root
         image: mcr.microsoft.com/mssql/server:2019-latest
         env:
           SA_PASSWORD: "YourStrong!Passw0rd"
           ACCEPT_EULA: "Y"
         ports:
           - 1433:1433
+        volumes:
+          - /var/lib/docker/volumes/mssql_db/_data:/var/opt/mssql/data
         options: >-
           --health-cmd "opt/mssql-tools/bin/sqlcmd -S 172.18.0.2 -U SA -P 'YourStrong!Passw0rd' -Q 'SELECT 1' || exit 1"
           --health-interval 10s
