@@ -16,7 +16,7 @@ jobs:
 
     services:
           sqlserver:
-            image: mcr.microsoft.com/mssql/server:2022-latest
+            image: mcr.microsoft.com/mssql/server:2019-latest
             env:
               SA_PASSWORD: "YourStrong!Passw0rd"
               ACCEPT_EULA: "Y"
@@ -29,16 +29,16 @@ jobs:
               --health-timeout 5s
               --health-retries 3
               
-          rabbitmq:
-            image: masstransit/rabbitmq
-            ports:
-              - 5672:5672
-              - 15672:15672
-            options: >-
-              --health-cmd "curl -f http://localhost:15672 || exit 1"
-              --health-interval 10s
-              --health-timeout 5s
-              --health-retries 5
+          # rabbitmq:
+          #   image: masstransit/rabbitmq
+          #   ports:
+          #     - 5672:5672
+          #     - 15672:15672
+          #   options: >-
+          #     --health-cmd "curl -f http://localhost:15672 || exit 1"
+          #     --health-interval 10s
+          #     --health-timeout 5s
+          #     --health-retries 5
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
