@@ -15,33 +15,19 @@ jobs:
     timeout-minutes: 20
 
     services:
-      sqlserver:
-        image: mcr.microsoft.com/mssql/server:2019-latest
-        env:
-          SA_PASSWORD: "YourStrong!Passw0rd"
-          ACCEPT_EULA: "Y"
-        ports:
-          - 1433:1433
-        volumes:
-          - ./data:/var/opt/mssql/data
-        options: >-
-          --health-cmd "opt/mssql-tools/bin/sqlcmd -S 172.18.0.2 -U SA -P 'YourStrong!Passw0rd' -Q 'SELECT 1' || exit 1"
-          --health-interval 10s
-          --health-start-period 30s
-          --health-timeout 5s
-          --health-retries 3
-    
-      # rabbitmq:
-      #   image: masstransit/rabbitmq
-      #   ports:
-      #      - 5672:5672
-      #      - 15672:15672
-      #   options: >-
-      #     --privileged
-      #     --health-cmd "curl -f http://localhost:15672 || exit 1"
-      #     --health-interval 10s
-      #     --health-timeout 5s
-      #     --health-retries 5
+          sqlserver:
+            image: mcr.microsoft.com/mssql/server:2019-latest
+            env:
+              SA_PASSWORD: "YourStrong!Passw0rd"
+              ACCEPT_EULA: "Y"
+            ports:
+              - 1433:1433
+            options: >-
+              --health-cmd "opt/mssql-tools/bin/sqlcmd -S 172.18.0.2 -U SA -P 'YourStrong!Passw0rd' -Q 'SELECT 1' || exit 1"
+              --health-interval 10s
+              --health-start-period 30s
+              --health-timeout 5s
+              --health-retries 3
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -50,12 +36,7 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 8.0.x
-
-    - name: Fix permissions on SQL Server directory
-      run: |
-        sudo chmod -R 777 /var/lib/docker/volumes/mssql_db/_data
-        sudo chown -R mssql:mssql /var/lib/docker/volumes/mssql_db/_data
-
+        
     - name: Restore dependencies
       run: dotnet restore PosTechFiap.sln
 
@@ -73,7 +54,7 @@ jobs:
         files: '**/appsettings.Test.json'
       env:
         Settings.RunningCI: true
-
+        
     - name: Run tests
       run: dotnet test PosTechFiap.sln --no-build --verbosity normal
 
