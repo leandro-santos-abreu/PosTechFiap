@@ -36,3 +36,11 @@ spec:
         - name: mssql-data
           persistentVolumeClaim:
             claimName: posttechfiap-api-database-pvc
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+
