@@ -1,0 +1,16 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+  name: rabbitmq-service
+spec:
+  selector:
+    app: rabbitmq
+  ports:
+    - protocol: TCP
+      name: gui
+      port: 15672
+      targetPort: 15672
+    - protocol: TCP
+      name: cli
+      port: 5672
+      targetPort: 5672

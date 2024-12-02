@@ -1,0 +1,44 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posttechfiap-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: posttechfiap-api
+  template:
+    metadata:
+      labels:
+        app: posttechfiap-api
+    spec:
+      containers:
+      - name: posttechfiap-api
+        image: onlyoutsider/posttechfiapapi:latest
+        ports:
+        - containerPort: 8080
+        - containerPort: 8443
+        volumeMounts:
+        - name: certificate-volume
+          mountPath: /app/certificate.pfx
+          subPath: certificate.pfx
+        env:
+        - name: ASPNETCORE_URLS
+          valueFrom:
+            configMapKeyRef:
+              name: posttechfiap-api-config  # Reference ConfigMap
+              key: ASPNETCORE_URLS          # Reference the specific key in ConfigMap
+        - name: ASPNETCORE_Kestrel__Certificates__Default__Path
+          valueFrom:
+            configMapKeyRef:
+              name: posttechfiap-api-config  # Reference ConfigMap
+              key: ASPNETCORE_Kestrel__Certificates__Default__Path  # Reference the specific key in ConfigMap
+        - name: ASPNETCORE_Kestrel__Certificates__Default__Password
+          valueFrom:
+            secretKeyRef:
+              name: posttechfiap-api-secret  # Reference Secret
+              key: ASPNETCORE_Kestrel__Certificates__Default__Password  # Reference specific key in Secret
+      volumes:
+      - name: certificate-volume
+        secret:
+          secretName: certificate-secret

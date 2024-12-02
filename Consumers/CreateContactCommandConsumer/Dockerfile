@@ -6,20 +6,16 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 
-# Ensure these paths are correct based on your project structure
 COPY ["Consumers/CreateContactCommandConsumer/CreateContactCommandConsumer.csproj", "Consumers/CreateContactCommandConsumer/"]
 COPY ["Application/Application.csproj", "Application/"]
 COPY ["Domain/Domain.csproj", "Domain/"]
 COPY ["Persistence/Persistence.csproj", "Persistence/"]
 COPY ["Infrastructure/Infrastructure.csproj", "Infrastructure/"]
 
-# Restore dependencies
-RUN dotnet restore "./Consumers/CreateContactCommandConsumer/CreateContactCommandConsumer.csproj"
+RUN dotnet restore "Consumers/CreateContactCommandConsumer/CreateContactCommandConsumer.csproj"
 
-# Copy the rest of the files
 COPY . .
 
-# Build the application
 WORKDIR "/src/Consumers/CreateContactCommandConsumer"
 RUN dotnet build "./CreateContactCommandConsumer.csproj" -c $BUILD_CONFIGURATION -o /app/build
 

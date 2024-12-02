@@ -1,0 +1,12 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+    name: posttechfiap-api-updatecontactcommandconsumer-service
+spec:
+    selector:
+        app: posttechfiap-updatecontactcommandconsumer-api
+    ports:
+    - protocol: TCP
+      port: 1003
+      targetPort: 1003
+    type: ClusterIP

@@ -1,0 +1,19 @@
+﻿apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: posttechfiap-createcontactcommandconsumer-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: posttechfiap-createcontactcommandconsumer-api
+  template:
+    metadata:
+      labels:
+        app: posttechfiap-createcontactcommandconsumer-api
+    spec:
+      containers:
+      - name: posttechfiap-createcontactcommandconsumer-api
+        image: onlyoutsider/posttechfiapapi-createcontactcommandconsumer:latest
+        ports:
+        - containerPort: 1001

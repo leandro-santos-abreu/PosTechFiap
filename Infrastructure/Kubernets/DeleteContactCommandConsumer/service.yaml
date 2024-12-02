@@ -1,0 +1,12 @@
+﻿apiVersion: v1
+kind: Service
+metadata:
+    name: posttechfiap-api-deletecontactcommandconsumer-service
+spec:
+    selector:
+        app: posttechfiap-deletecontactcommandconsumer-api
+    ports:
+    - protocol: TCP
+      port: 1002
+      targetPort: 1002
+    type: ClusterIP
