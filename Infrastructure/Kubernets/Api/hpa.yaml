@@ -2,7 +2,6 @@ apiVersion: autoscaling/v1
 kind: HorizontalPodAutoscaler
 metadata:
   name: posttechfiap-api-hpa # Nome do HPA
-  namespace: posttechfiap-api # Namespace onde está seu Deployment
 spec:
   scaleTargetRef:
     apiVersion: apps/v1
@@ -10,11 +9,4 @@ spec:
     name: posttechfiap-api # Nome do Deployment que será escalado
   minReplicas: 1 # Número mínimo de réplicas
   maxReplicas: 10 # Número máximo de réplicas
-  targetCPUUtilizationPercentage: 70
-  metrics:
-    - type: Resource
-      resource:
-        name: cpu # Métrica baseada em CPU
-        target:
-          type: Utilization
-          averageUtilization: 80 # Limite de 80% de uso de CPU para iniciar a escala
+  targetCPUUtilizationPercentage: 30

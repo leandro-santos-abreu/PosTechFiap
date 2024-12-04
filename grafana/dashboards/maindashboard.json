@@ -18,6 +18,7 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
+  "id": 1,
   "links": [],
   "panels": [
     {
@@ -38,6 +39,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -99,18 +101,24 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.1",
       "targets": [
         {
           "datasource": {
             "type": "prometheus",
             "uid": "8rTXXfF4z"
           },
-          "editorMode": "code",
-          "expr": "sum(microsoft_aspnetcore_hosting_http_server_request_duration_count) by (http_response_status_code)",
+          "disableTextWrap": false,
+          "editorMode": "builder",
+          "expr": "sum by(http_response_status_code) (microsoft_aspnetcore_hosting_http_server_request_duration_count{http_route!=\"/metrics\"})",
+          "fullMetaSearch": false,
+          "hide": false,
+          "includeNullMetadata": true,
           "instant": false,
           "legendFormat": "{{http_response_status_code}}",
           "range": true,
-          "refId": "A"
+          "refId": "A",
+          "useBackend": false
         }
       ],
       "title": "Requests By Status Code",
@@ -133,6 +141,7 @@
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 0,
             "gradientMode": "none",
@@ -197,6 +206,7 @@
           "sort": "none"
         }
       },
+      "pluginVersion": "11.3.1",
       "targets": [
         {
           "datasource": {
@@ -204,8 +214,8 @@
             "uid": "8rTXXfF4z"
           },
           "disableTextWrap": false,
-          "editorMode": "code",
-          "expr": "sum(microsoft_aspnetcore_hosting_http_server_request_duration_sum{instance=\"posttechfiap.api:8443\", http_route!=\"/metrics\"}) by (http_route)",
+          "editorMode": "builder",
+          "expr": "sum by(http_route) (microsoft_aspnetcore_hosting_http_server_request_duration_sum{instance=\"posttechfiap-api-service:443\", http_route!=\"/metrics\"})",
           "fullMetaSearch": false,
           "includeNullMetadata": true,
           "instant": false,
@@ -269,7 +279,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.1.1",
+      "pluginVersion": "11.3.1",
       "targets": [
         {
           "datasource": {
@@ -338,7 +348,7 @@
         "showThresholdMarkers": true,
         "sizing": "auto"
       },
-      "pluginVersion": "11.1.1",
+      "pluginVersion": "11.3.1",
       "targets": [
         {
           "datasource": {
@@ -385,7 +395,8 @@
       "type": "gauge"
     }
   ],
-  "schemaVersion": 39,
+  "preload": false,
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": []

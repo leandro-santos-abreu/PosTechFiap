@@ -7,6 +7,16 @@ kubectl apply -f Infrastructure\\Kubernets\\Api
 kubectl apply -f Infrastructure\\Kubernets\\UpdateContactCommandConsumer
 kubectl apply -f Infrastructure\\Kubernets\\DeleteContactCommandConsumer
 kubectl apply -f Infrastructure\\Kubernets\\CreateContactCommandConsumer
+
+
+kubectl apply -f Infrastructure\\Kubernets\\Grafana\\PersistentVolume
+kubectl apply -f Infrastructure\\Kubernets\\Grafana\\PersistentVolumeChain
+kubectl apply -f Infrastructure\\Kubernets\\Grafana\\PersistentVolumeCopy
+
+timeout 10
+
+kubectl cp grafana copy-data-to-pv:/etc
+
 kubectl apply -f Infrastructure\\Kubernets\\Grafana
 kubectl apply -f Infrastructure\\Kubernets\\NodeExporter
 kubectl apply -f Infrastructure\\Kubernets\\Prometheus

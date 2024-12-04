@@ -14,6 +14,13 @@ spec:
     spec:
       containers:
       - name: grafana
-        image: grafana/grafana
+        image: grafana/grafana:latest
         ports:
         - containerPort: 3000
+        volumeMounts:
+        - name: grafana-storage
+          mountPath: /etc/grafana
+      volumes:
+      - name: grafana-storage
+        persistentVolumeClaim:
+          claimName: grafana-pvc
